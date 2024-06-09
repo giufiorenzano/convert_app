@@ -27,14 +27,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.buttonConvert.setOnClickListener {
             val realValue = binding.editTextRealValue.text.toString().toDoubleOrNull()
-            println(realValue)
             if(realValue != null){
                 try {
                     viewModel.getCurrencies("USD-BRL,EUR-BRL") { response ->
                         response?.let {
                             try {
-                                val usdRate = it.usdBRL.bid?.toDoubleOrNull() ?: 0.0
-                                val eurRate = it.eurBRL.bid?.toDoubleOrNull() ?: 0.0
+                                val usdRate = it.usdBrl.bid?.toDoubleOrNull() ?: 0.0
+                                val eurRate = it.eurBrl.bid?.toDoubleOrNull() ?: 0.0
                                 binding.textViewUsdValue.text = String.format(Locale.getDefault(), "%.2f", realValue * usdRate)
                                 binding.textViewEurValue.text = String.format(Locale.getDefault(), "%.2f", realValue * eurRate)
                             } catch (e: Exception) {
@@ -42,13 +41,13 @@ class MainActivity : AppCompatActivity() {
                                 Toast.makeText(this, "Error on analysing answer", Toast.LENGTH_SHORT).show()
                             }
                         } ?: run {
-                            Log.e("MainActivity", "Resposta vazia")
-                            Toast.makeText(this, "Falha ao obter resposta do servidor", Toast.LENGTH_SHORT).show()
+                            Log.e("MainActivity", "Empty answer")
+                            Toast.makeText(this, "Failed to get response from server", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }catch (e: Exception) {
-                    Log.e("MainActivity", "Error on analysing currencies: ${e.message}")
-                    Toast.makeText(this, "Error on analysing currencies", Toast.LENGTH_SHORT).show()
+                    Log.e("MainActivity", "Error on searching currencies: ${e.message}")
+                    Toast.makeText(this, "Error on searching currencies", Toast.LENGTH_SHORT).show()
                 }
             }else{
                 Log.e("MainActivity", "Input value is invalid")

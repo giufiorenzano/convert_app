@@ -3,8 +3,8 @@ package com.example.app_convert.data.model
 import com.google.gson.annotations.SerializedName
 
 class CurrencyResponse (
-    @SerializedName("USD-BRL") val usdBRL: CurrencyInfo,
-    @SerializedName("EUR-BRL") val eurBRL: CurrencyInfo
+    @SerializedName("USDBRL") val usdBrl: CurrencyInfo,
+    @SerializedName("EURBRL") val eurBrl: CurrencyInfo
 )
 
 data class CurrencyInfo(
